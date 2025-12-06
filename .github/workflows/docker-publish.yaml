@@ -1,4 +1,4 @@
-name: Docker Build and Push to GHCR
+name: Docker Multi-Platform Build and Push to GHCR
 
 on:
   push:
@@ -29,20 +29,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
 
-      # 4️⃣ Backend image build & push
+      # 4️⃣ Backend image multi-platform build & push
       - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
-          context: .             # Ana dizin
-          file: ./Dockerfile      # Ana dizindeki Dockerfile
+          context: .
+          file: ./Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.BACKEND_IMAGE }}
 
-      # 5️⃣ Frontend image build & push
+      # 5️⃣ Frontend image multi-platform build & push
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.FRONTEND_IMAGE }}

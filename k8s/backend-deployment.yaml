@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ahmetcan2022/taskmanager-backend:latest
+          image: ghcr.io/ahmetcanyilmaz2022/taskmanager-backend:latest
           ports:
             - containerPort: 8000
           env:
@@ -31,3 +31,9 @@ spec:
                   name: db-secret
                   key: postgres-password
             - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-db
+      imagePullSecrets:
+        - name: ghcr-secret

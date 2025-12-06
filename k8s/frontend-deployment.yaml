@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ahmetcanyilmaz2022/taskmanager-frontend:latest
+          image: ahmetcan2022/taskmanager-frontend:latest
           ports:
             - containerPort: 80

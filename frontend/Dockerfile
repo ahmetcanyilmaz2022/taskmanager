@@ -1,13 +1,11 @@
-# Stage 1: Build
-FROM node:20-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-# Stage 2: Serve
+# Kullanacağımız base image
 FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+
+# Uygulama dosyalarını Nginx klasörüne kopyala
+COPY . /usr/share/nginx/html
+
+# 80 portunu aç
 EXPOSE 80
+
+# Nginx çalıştır
 CMD ["nginx", "-g", "daemon off;"]

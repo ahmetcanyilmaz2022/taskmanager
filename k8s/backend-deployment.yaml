@@ -1,11 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
-  labels:
-    app: backend
+  name: backend-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -16,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ahmetcanyilmaz2022/taskmanager:latest
+          image: ahmetcanyilmaz2022/taskmanager-backend:latest
           ports:
             - containerPort: 8000
           env:
@@ -26,24 +24,10 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: db-secret
-                  key: username
+                  key: postgres-user
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: db-secret
-                  key: password
+                  key: postgres-password
             - name: DATABASE_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: dbname
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8000

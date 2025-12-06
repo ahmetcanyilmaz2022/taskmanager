@@ -42,4 +42,3 @@ steps:
       file: ./Dockerfile
       push: true
       tags: ${{ env.FRONTEND_IMAGE }}
-```

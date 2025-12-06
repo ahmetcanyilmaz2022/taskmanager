@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - backend-deployment.yaml
+  - backend-service.yaml
+  - postgres-deployment.yaml
+  - postgres-service.yaml
+  - configmap.yaml
+  - secret.yaml
+  - ingress.yaml
+
+commonLabels:
+  app: taskmanager
+
+images:
+  - name: taskmanager-backend
+    newName: ghcr.io/ahmetcanyilmaz2022/taskmanager
+    newTag: latest

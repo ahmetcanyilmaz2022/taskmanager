@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ahmetcanyilmaz2022/taskmanager-backend:latest
+          image: ahmetcan2022/taskmanager-backend:latest
           ports:
             - containerPort: 8000
           env:
